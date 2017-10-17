@@ -4,6 +4,7 @@ const request = require('supertest');
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
+//remove all todo to length = 0
 beforeEach((done) => {
   Todo.remove({}).then(() => {
     done();
@@ -27,7 +28,7 @@ describe('POST /todos', () => {
         }
 
         Todo.find().then((todos) => {
-          expect(todos.length).toBe(1);
+          expect(todos.length).toBe(1); //check length increment
           expect(todos[0].text).toBe(text);
           done();
         }).catch((e) => {
@@ -47,7 +48,7 @@ describe('POST /todos', () => {
         }
 
         Todo.find().then((todos) => {
-          expect(todos.length).toBe(0);
+          expect(todos.length).toBe(0); // check length not increment
           done();
         }).catch((e) => done(e));
       });
